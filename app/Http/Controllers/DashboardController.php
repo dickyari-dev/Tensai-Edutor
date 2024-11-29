@@ -16,6 +16,6 @@ class DashboardController extends Controller
     }
     public function pengajar()
     {
-        return view('pengajar.dashboard'); // Adjust this path according to your view location
+        return view('pengajar.index'); // Adjust this path according to your view location
     }
 }

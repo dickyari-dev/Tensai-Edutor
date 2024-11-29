@@ -33,20 +33,12 @@ class LoginController extends Controller
             $user = User::where('email', $request->email)->first();
 
             // Cek peran user
-            if ($user->role === 'Owner' || $user->role === 'Pengajar' || $user->role === 'Siswa') {
-                // Regenerasi session
-                $request->session()->regenerate();
-
-                // Arahkan ke halaman dashboard atau halaman yang sesuai dengan peran
-                if ($user->role === 'Owner') {
-                    return redirect('/dashboard/owner')->with('success', 'Login sebagai Owner berhasil!');
-                } else {
-                    return redirect('/dashboard/admin')->with('success', 'Login sebagai Pengajar berhasil!');
-                }
+            if($user->role === 'Owner'){
+                return redirect('/dashboard/owner')->with('success', 'Login sebagai Owner berhasil!');
+            } else if($user->role === 'Pengajar'){
+                return redirect()->route('dashboard.pengajar')->with('success', 'Login sebagai Pengajar berhasil!');
             } else {
-                // Jika peran tidak valid, logout
-                Auth::logout();
-                return back()->withErrors(['email' => 'Peran pengguna tidak valid.']);
+                return redirect('/dashboard/admin')->with('success', 'Login sebagai Admin berhasil!');
             }
         } else {
             // Jika login gagal, kembali dengan error

@@ -5,9 +5,29 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">Edit Pengajar</h5>
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form action="{{ route('pengajar.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="id" value="{{ $pengajar->id }}">
+                <input type="hidden" name="user_id" value="{{ $user->id }}">
                 <div class="form-group">
                     <label>Nama Pengajar</label>
                     <input type="text" name="nama_pengajar" class="form-control" value="{{ $pengajar->nama_pengajar }}" required>
@@ -40,6 +60,14 @@
                 <div class="form-group">
                     <label>Alamat</label>
                     <input type="text" name="alamat" class="form-control" value="{{ $pengajar->alamat }}" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" value="{{ $user->email }}" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-control">
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>

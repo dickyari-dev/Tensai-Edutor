@@ -21,22 +21,6 @@ class UsersTableSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            [
-                'name' => 'Pengajar 1',
-                'email' => 'pengajar1@gmail.com',
-                'password' => Hash::make('password123'), // Ganti dengan password yang diinginkan
-                'role' => 'Pengajar',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Pengajar 2',
-                'email' => 'pengajar2@gmail.com',
-                'password' => Hash::make('password123'), // Ganti dengan password yang diinginkan
-                'role' => 'Pengajar',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
         ]);
     }
 }

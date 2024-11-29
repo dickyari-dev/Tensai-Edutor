@@ -38,19 +38,6 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('pendaftaran/store', [TransaksiController::class, 'pendaftaran'])->name('pendaftaranPost');
 
 
-// Protected Routes
-Route::middleware(['auth'])->group(function () {
-  
-    Route::get('/dashboard/admin', [DashboardController::class, 'admin']);
-    Route::resource('/dashboard/pengajar', PengajarController::class);
-    Route::resource('/dashboard/siswa', SiswaController::class);
-    Route::resource('/dashboard/transaksi', TransaksiController::class);
-    Route::resource('/dashboard/user', UserController::class);
-
-  
-});
-
-
 Route::group(['middleware' => ['auth.check:Owner']], function () {  
     Route::get('/dashboard/owner', [DashboardController::class, 'owner']);
 
@@ -63,11 +50,14 @@ Route::group(['middleware' => ['auth.check:Owner']], function () {
 
 
     // transaksi
+    Route::get('/dashboard/transaksi/create', [TransaksiController::class, 'create'])->name('transaksi.create');
+    Route::post('/dashboard/transaksi/store', [TransaksiController::class, 'store'])->name('transaksi.store');
     Route::get('/dashboard/transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
     Route::get('/dashboard/transaksi/edit/{id}', [TransaksiController::class, 'edit'])->name('transaksi.edit');
     Route::post('/dashboard/transaksi/update', [TransaksiController::class, 'update'])->name('transaksi.update');
 
     // siswa
+    Route::resource('/dashboard/siswa', SiswaController::class);
     Route::get('/dashboard/siswa/edit/{id}', [SiswaController::class, 'edit'])->name('siswa.edit');
     Route::post('/dashboard/siswa/update', [SiswaController::class, 'update'])->name('siswa.update');
 
@@ -78,6 +68,23 @@ Route::group(['middleware' => ['auth.check:Owner']], function () {
     Route::get('/dashboard/paket/edit/{id}', [PaketController::class, 'edit'])->name('paket.edit');
     Route::post('/dashboard/paket/update', [PaketController::class, 'update'])->name('paket.update');
     Route::delete('/dashboard/paket/destroy/{id}', [PaketController::class, 'destroy'])->name('paket.destroy');
+
+    // user
+    Route::resource('/dashboard/user', UserController::class);
 });
 
+Route::group(['middleware' => ['auth.check:Pengajar']], function () {  
+    Route::get('/pengajar', [DashboardController::class, 'pengajar'])->name('dashboard.pengajar');
 
+    // pengajar
+    Route::get('/pengajar/data-pengajar', [PengajarController::class, 'dataPengajar'])->name('pengajar.data.pengajar');
+
+    // siswa
+    Route::get('/pengajar/data-siswa', [SiswaController::class, 'dataSiswa'])->name('pengajar.data-siswa');
+
+    // kosongkan siswa
+    Route::get('/pengajar/data-siswa/kosongkan/{id}', [SiswaController::class, 'kosongkan'])->name('siswa.kosongkan');
+
+    // ambil siswa
+    Route::get('/pengajar/data-siswa/ambil/{id}', [SiswaController::class, 'ambil'])->name('siswa.ambil');
+});

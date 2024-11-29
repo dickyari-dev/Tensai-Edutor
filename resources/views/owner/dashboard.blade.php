@@ -70,13 +70,13 @@
                 </li>
             @else
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('pengajar.index') }}">
+                    <a class="nav-link" href="{{ route('pengajar.data.pengajar') }}">
                         <i class="fas fa-chalkboard-teacher"></i> <!-- Ikon untuk Pengajar -->
                         <span>Data Pengajar</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('siswa.index') }}">
+                    <a class="nav-link" href="{{ route('pengajar.data-siswa') }}">
                         <i class="fas fa-user-graduate"></i> <!-- Ikon untuk Siswa -->
                         <span>Data Siswa</span>
                     </a>

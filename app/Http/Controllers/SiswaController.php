@@ -123,4 +123,31 @@ class SiswaController extends Controller
         // Redirect setelah berhasil menghapus
         return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil dihapus!');
     }
+
+    public function dataSiswa()
+    {
+
+        $idPengajar = Pengajar::where('user_id', auth()->user()->id)->first()->id;
+        $siswaAll = Siswa::all(); // Ambil semua data pengajar
+        $siswa = Siswa::where('pengajar_id', $idPengajar)->get();
+        $siswaKosong = Siswa::where('pengajar_id', null)->get();
+        return view('pengajar.dataSiswa', compact('siswaAll', 'siswa', 'siswaKosong'));
+    }
+
+    public function kosongkan($id)
+    {
+        $siswa = Siswa::find($id);
+        $siswa->pengajar_id = null;
+        $siswa->save();
+        return redirect()->route('pengajar.data-siswa')->with('success', 'Data siswa berhasil dikosongkan!');
+    }
+
+    public function ambil($id)
+    {
+        $siswa = Siswa::find($id);
+        $idPengajar = Pengajar::where('user_id', auth()->user()->id)->first()->id;
+        $siswa->pengajar_id = $idPengajar;
+        $siswa->save();
+        return redirect()->route('pengajar.data-siswa')->with('success', 'Data siswa berhasil diambil!');
+    }
 }

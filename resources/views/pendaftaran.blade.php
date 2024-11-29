@@ -144,8 +144,8 @@
     rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
@@ -275,7 +275,7 @@
                   <input class="form-control" id="nama_orang_tua" name='nama_orang_tua' placeholder="Nama Orang Tua"
                     type="text" required>
                 </div>
-                
+
                 <div class="form-group col-md-6">
                   <label for="tingkat_pendidikan">Tingkat Pendidikan</label>
                   <input class="form-control" id="tingkat_pendidikan" name='tingkat_pendidikan' placeholder="SMA"
@@ -324,7 +324,7 @@
                     @endforeach
                   </select>
                 </div>
-                
+
                 <div class="form-group col-md-12">
                   <label for="pengajar_id">Pilih Pengajar</label>
                   <div class="row">
@@ -334,7 +334,7 @@
                         <input name="pengajar_id" class="radio" type="radio" value="{{ $p->id }}" checked required>
                         <img src="{{ asset('images/' . $p->foto) }}" class="img-fluid" alt=""
                           style="width: 100%; height: 150px; object-fit: cover;" loading="lazy">
-                          <p class="text-center">{{ $p->nama_pengajar }}</p>
+                        <p class="text-center">{{ $p->nama_pengajar }}</p>
                         <div class="social d-flex justify-content-center flex-row">
                           <div class="item">
                             <i class="fi fi-rr-book"></i>
@@ -351,7 +351,36 @@
               <!-- Submit Button -->
               <div class="form-row">
                 <div class="form-group col-md-12 text-right">
-                  <button type="submit" class="btn btn-default">Submit</button>
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Submit
+                  </button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="exampleModalLabel">Informasi Penting</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-start">
+                          Terimakasih telah mengisi data diri dan mengirimkan bukti pembayaran. Berikut beberapa point penting:
+                          <ul>
+                            <li>Pendaftaran akan di proses dalam 1x24 jam</li>
+                            <li>Jika berhasil atau ada kesalahan akan mendapatkan pesan melalui whatsapp dan akan masuk grup whatsapp kelas</li>
+                            <li>Jika ada kendala silahkan hubungi nomor dibawah ini <a href="https://wa.me/6281234567890">0856-5131-9976</a></li>
+                            <li>Silakan klik tombol Submit Dibawah ini</li>
+                          </ul>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -439,7 +468,9 @@
 
 
   <!-- Vendor JS Files -->
-  <script src="{{asset(" assets/vendor/bootstrap/js/bootstrap.bundle.min.js") }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
+  </script>
   <script src="{{asset(" assets/vendor/aos/aos.js") }}"></script>
   <script src="{{asset(" assets/vendor/glightbox/js/glightbox.min.js") }}"></script>
   <script src="{{asset(" assets/vendor/purecounter/purecounter_vanilla.js") }}"></script>
